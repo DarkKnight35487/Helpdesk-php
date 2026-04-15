@@ -1,0 +1,56 @@
+<style>
+        table { width: 100%; border-collapse: collapse; collapse: margin-top:20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 60%;
+    margin: auto; /* ini bikin ke tengah */
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+    </style>
+<?php
+include 'koneksi.php';
+$id = $_GET['id'];
+$data = mysqli_query($conn, "SELECT * FROM pengaduan WHERE id='$id'");
+$row = mysqli_fetch_array($data);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$nama = $_POST['nama'];
+$laporan = $_POST['laporan'];
+// Perintah SQL Update [cite: 65, 66]
+$update = "UPDATE pengaduan SET nama='$nama', laporan='$laporan' WHERE id='$id'";
+if (mysqli_query($conn, $update)) {
+header("location:index.php");
+}
+}
+?>
+<h2>Edit Laporan</h2>
+<form method="POST">
+<label>Nama:</label><br>
+<input type="text" name="nama" value="<?php echo $row['nama']; ?>"><br><br>
+<label>Laporan:</label><br>
+<textarea name="laporan"><?php echo $row['laporan']; ?></textarea><br><br>
+<button type="submit">Simpan Perubahan</button>
+<a href="index.php">Batal</a>
+</form>

@@ -74,6 +74,7 @@ table, th, td {
             <th>No</th>
             <th>Nama Pelapor</th>
             <th>Laporan</th>
+            <th>Aksi</th>
         </tr>
         <?php 
         $no = 1; 
@@ -84,8 +85,12 @@ table, th, td {
             <td><?php echo $row['nama']; ?></td>
             <td><?php echo $row['laporan']; ?></td>
             <td>
-                <a href="hapus.php?id=<?php echo $row['id'];?>"
-                onclick="return confirm('Apakah Anda yakin ingin menghapus laporan ini?')">Hapus</a>
+                <td>
+                    <td>
+    <a href="edit.php?id=<?php echo $row['id']; ?>" style="color: blue;">Edit</a> |
+    <a href="hapus.php?id=<?php echo $row['id']; ?>"
+    onclick="return confirm('Yakin hapus?')" style="color: red;">Hapus</a>
+</td>
             </td>
         </tr>
         <?php } ?>
