@@ -9,15 +9,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $query = "INSERT INTO pengaduan (nama, laporan) VALUES ('$nama', '$laporan')";
 
     if (mysqli_query($conn, $query)) {
-        echo "<div style='color: green;'><b>Sukses!</b>Laporan dari<b>$nama</b>telah diterima: <i>$laporan</i></div><hr>";
+        echo "<div style='color: green;'><b>Sukses!</b> Laporan dari <b>$nama </b> telah diterima: <i>$laporan </i></div><hr>";
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($conn);
     }
-    // simpan data ke database atau lakukan proses lainnya
-    // ...
-
-    // tampilkan pesan sukses
-    echo "<div style='color: green;'><b>Sukses!</b>Laporan dari<b>$nama</b>telah diterima: <i>$laporan</i></div><hr>";
 }
 // proses ambil data dari database
 $ambil_data =mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
@@ -31,10 +26,38 @@ $ambil_data =mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
     <style>
         table { width: 100%; border-collapse: collapse; collapse: margin-top:20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 60%;
+    margin: auto; /* ini bikin ke tengah */
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
     </style>
 </head>
 <body>
-    <h1>Kirim Lapotan Pengaduan</h1>
+    <h1>Kirim Laporan Pengaduan</h1>
     <form method="POST" action="">
         <label>Nama anda</label><br>
         <input type="text" name="nama" placeholder="Masukan nama... "><br><br>
@@ -60,6 +83,10 @@ $ambil_data =mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
             <td><?php echo $no++; ?></td>
             <td><?php echo $row['nama']; ?></td>
             <td><?php echo $row['laporan']; ?></td>
+            <td>
+                <a href="hapus.php?id=<?php echo $row['id'];?>"
+                onclick="return confirm('Apakah Anda yakin ingin menghapus laporan ini?')">Hapus</a>
+            </td>
         </tr>
         <?php } ?>
     </table>
