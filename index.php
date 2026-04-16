@@ -84,13 +84,10 @@ table, th, td {
             <td><?php echo $no++; ?></td>
             <td><?php echo $row['nama']; ?></td>
             <td><?php echo $row['laporan']; ?></td>
-            <td>
                 <td>
-                    <td>
     <a href="edit.php?id=<?php echo $row['id']; ?>" style="color: blue;">Edit</a> |
     <a href="hapus.php?id=<?php echo $row['id']; ?>"
     onclick="return confirm('Yakin hapus?')" style="color: red;">Hapus</a>
-</td>
             </td>
         </tr>
         <?php } ?>
